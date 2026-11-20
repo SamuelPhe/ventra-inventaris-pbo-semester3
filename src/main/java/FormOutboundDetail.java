@@ -1,0 +1,499 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
+/**
+ *
+ * @author Gunaw
+ */
+public class FormOutboundDetail extends javax.swing.JFrame {
+    
+
+    /**
+     * Creates new form FormOutboundDetail
+     */
+     public int idOutbound;
+     
+    public FormOutboundDetail(int idOutbound) {
+        initComponents();
+        this.idOutbound = idOutbound;
+        this.setLocationRelativeTo(null);
+
+        loadHeader();
+        loadDetail();
+        loadDelivery();
+        
+
+
+    }
+    
+public class RupiahRenderer extends DefaultTableCellRenderer {
+
+    private final NumberFormat format =
+        NumberFormat.getInstance(new Locale("id", "ID"));
+
+    @Override
+    public void setValue(Object value) {
+        if (value instanceof Number) {
+            setText(format.format(value));
+            setHorizontalAlignment(JLabel.RIGHT);
+        } else {
+            super.setValue(value);
+        }
+    }
+}
+
+    private void loadDelivery() {
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+
+        String sql = """
+            SELECT  nama_penerima, no_hp, alamat
+            FROM delivery
+            WHERE id_outbound = ?
+        """;
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, idOutbound);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+
+            lblNama.setText(rs.getString("nama_penerima"));
+            lblHp.setText(rs.getString("no_hp"));
+            lblAlamat.setText(rs.getString("alamat"));
+            panelDelivery.setVisible(true);
+        } else {
+            // pickup → ga ada delivery
+            panelDelivery.setVisible(false);
+            d.setVisible(true);
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}
+
+    
+private void loadHeader() {
+    try {
+        Connection conn = DatabaseConnection.getConnection();
+
+        String sql = """
+            SELECT 
+                o.envelope_code,
+                o.tanggal,
+                u.username,
+                d.surat_jalan
+            FROM outbound o
+            LEFT JOIN user u ON u.id = o.created_by
+            LEFT JOIN delivery d ON d.id_outbound = o.id_outbound
+            WHERE o.id_outbound = ?
+        """;
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, idOutbound);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            IblSuratJalan.setText(rs.getString("surat_jalan"));
+            IblEnvelop.setText(rs.getString("envelope_code"));
+            IblTanggal.setText(rs.getDate("tanggal").toString());
+            IblUser.setText(rs.getString("username"));
+            
+        }
+
+        rs.close();
+        pst.close();
+        conn.close();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}
+
+
+private void loadDetail() {
+    DefaultTableModel model = new DefaultTableModel(
+        new Object[]{"Produk", "Qty", "Harga Jual Per Produk", "Subtotal"}, 0
+    );
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+
+        String sql = """
+            SELECT
+                p.nama_produk,
+                d.qty,
+                d.harga_jual,
+                d.subtotal
+            FROM outbound_detail d
+            JOIN produk p ON p.id_produk = d.id_produk
+            WHERE d.id_outbound = ?
+        """;
+
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, idOutbound);
+        ResultSet rs = pst.executeQuery();
+
+        boolean adaData = false;
+
+        while (rs.next()) {
+            adaData = true;
+            model.addRow(new Object[]{
+                rs.getString("nama_produk"),
+                rs.getInt("qty"),
+                rs.getInt("harga_jual"),
+                rs.getInt("subtotal")
+            });
+        }
+
+        if (!adaData) {
+            JOptionPane.showMessageDialog(this, "Detail outbound kosong");
+        }
+
+        jTable1.setModel(model);
+        jTable1.getColumnModel().getColumn(2).setCellRenderer(new RupiahRenderer());
+jTable1.getColumnModel().getColumn(3).setCellRenderer(new RupiahRenderer());
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}
+
+
+
+
+
+
+
+
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        IblEnvelop = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        IblTanggal = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        IblUser = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        panelDelivery = new java.awt.Panel();
+        b = new javax.swing.JLabel();
+        lblNama = new javax.swing.JLabel();
+        a = new javax.swing.JLabel();
+        lblHp = new javax.swing.JLabel();
+        c = new javax.swing.JLabel();
+        lblAlamat = new javax.swing.JLabel();
+        d = new javax.swing.JLabel();
+        IblSuratJalan = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Inbound Detail");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Outbound Detail");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel7)
+                .addContainerGap(365, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 153, 0));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 39, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Envelope Code  :");
+
+        IblEnvelop.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        IblEnvelop.setText("jLabel7");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Date :");
+
+        IblTanggal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        IblTanggal.setText("jLabel8");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("User :");
+
+        IblUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        IblUser.setText("jLabel9");
+
+        jScrollPane1.setViewportView(jTable1);
+
+        jButton3.setBackground(new java.awt.Color(0, 102, 102));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Back");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        panelDelivery.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        b.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        b.setText("Recipient :");
+
+        lblNama.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNama.setText("Null");
+
+        a.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        a.setText("No Hp       :");
+
+        lblHp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblHp.setText("Null");
+
+        c.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        c.setText("Address    :");
+
+        lblAlamat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblAlamat.setText("Null");
+
+        d.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        d.setText("Travel Letter Number :");
+
+        IblSuratJalan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        IblSuratJalan.setText("Null");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Travel Letter");
+
+        javax.swing.GroupLayout panelDeliveryLayout = new javax.swing.GroupLayout(panelDelivery);
+        panelDelivery.setLayout(panelDeliveryLayout);
+        panelDeliveryLayout.setHorizontalGroup(
+            panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeliveryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(panelDeliveryLayout.createSequentialGroup()
+                        .addComponent(c)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAlamat))
+                    .addGroup(panelDeliveryLayout.createSequentialGroup()
+                        .addComponent(a)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblHp))
+                    .addGroup(panelDeliveryLayout.createSequentialGroup()
+                        .addComponent(b)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblNama))
+                    .addGroup(panelDeliveryLayout.createSequentialGroup()
+                        .addComponent(d)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(IblSuratJalan)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        panelDeliveryLayout.setVerticalGroup(
+            panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDeliveryLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(d)
+                    .addComponent(IblSuratJalan))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b)
+                    .addComponent(lblNama))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(a)
+                    .addComponent(lblHp))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelDeliveryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(c)
+                    .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(panelDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(IblUser))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(IblEnvelop)
+                            .addGap(267, 267, 267)
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(IblTanggal))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(IblEnvelop)
+                    .addComponent(jLabel4)
+                    .addComponent(IblTanggal))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IblUser)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDelivery, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(72, 72, 72))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+ 
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IblEnvelop;
+    private javax.swing.JLabel IblSuratJalan;
+    private javax.swing.JLabel IblTanggal;
+    private javax.swing.JLabel IblUser;
+    private javax.swing.JLabel a;
+    private javax.swing.JLabel b;
+    private javax.swing.JLabel c;
+    private javax.swing.JLabel d;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblAlamat;
+    private javax.swing.JLabel lblHp;
+    private javax.swing.JLabel lblNama;
+    private java.awt.Panel panelDelivery;
+    // End of variables declaration//GEN-END:variables
+}
