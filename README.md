@@ -20,7 +20,7 @@ Proyek aplikasi desktop pengelolaan inventaris yang dibuat sebagai tugas akademi
 ## Struktur proyek
 - `pom.xml`: konfigurasi Maven.
 - `src/main/java`: source code Java dan form NetBeans.
-- `src/main/resources/images`: aset gambar yang tersedia.
+- `src/main/resources/images`: dua aset logo yang tersedia. Beberapa referensi gambar antarmuka pada form mungkin belum ikut terarsip, sehingga tampilan tertentu perlu diperiksa setelah proyek dijalankan.
 - `database/`: catatan persiapan database dan migrasi kolom password.
 
 ## Persiapan menjalankan
