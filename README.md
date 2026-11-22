@@ -54,7 +54,11 @@ flowchart TD
 
 ## 5. Demo and local setup
 
-There is **no public web demo** because this is a desktop application. To run it locally:
+A **browser-based simulation** of Ventra's inventory workflows is available in [`demo/index.html`](demo/index.html). It recreates the main dashboard, products, stock adjustment, inbound, outbound, and delivery interactions with fictional data. It is a web adaptation for portfolio viewing, not the original Java Swing executable, and it does not connect to MySQL.
+
+To publish the demo, enable GitHub Pages at **Settings → Pages → Build and deployment → Source: GitHub Actions**, then run **Deploy browser demo** from the Actions tab. After deployment, the public URL will be: https://samuelphe.github.io/ventra-inventaris-pbo-semester3/.
+
+The original Java application can still be run locally:
 
 1. Install JDK 17, Maven, and MySQL or MariaDB.
 2. Restore the project database named `uas3`. The repository does not currently include a complete SQL schema or database dump.
