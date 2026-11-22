@@ -19,6 +19,9 @@ fi
 echo "[Ventra] Menyiapkan aplikasi Java..."
 mvn -B -DskipTests package dependency:copy-dependencies
 
+echo "[Ventra] Memastikan skema database kompatibel..."
+java -cp "target/classes:target/dependency/*" DatabaseSchemaCompatibility
+
 echo "[Ventra] Membuka form login asli..."
 nohup java -cp "target/classes:target/dependency/*" Login_Form \
   >/tmp/ventra-desktop.log 2>&1 </dev/null &
