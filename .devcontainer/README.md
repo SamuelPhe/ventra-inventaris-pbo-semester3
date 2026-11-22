@@ -23,6 +23,8 @@ The browser should show the Ventra PHP login page. After login, the page shows p
 
 Keep both ports **Private**. Do not change them to Public.
 
+If this Codespace was created before the web service/port was added or updated, open the Command Palette and run **Codespaces: Rebuild Container**. This applies the current Compose configuration; it does not require deleting the Codespace or its named database volume.
+
 ## Database and scope
 
 The Codespace restores `uas3 (6).sql` into its own MariaDB container and applies the password and schema compatibility migrations. The PHP web version is a separate, limited browser interface for login and dashboard summaries; it does not yet replace the original Swing modules for inbound, outbound, stock adjustment, and master data.
