@@ -94,7 +94,7 @@ label{display:block;margin:0 0 9px;color:#999;font:18px Tahoma,Arial,sans-serif}
 </head><body>
 <div class="window">
 <?php if (!$user): ?>
-<section class="brand"><img src="../src/main/resources/images/Logo%20(1)_1.png" alt="Ventra"><h1>VENTRA</h1></section>
+<section class="brand"><img src="https://raw.githubusercontent.com/SamuelPhe/ventra-inventaris-pbo-semester3/main/src/main/resources/images/Logo%20(1)_1.png" alt="Ventra"><h1>VENTRA</h1></section>
 <section class="login">
 <h2>USER LOGIN</h2>
 <?php if ($error !== ''): ?><div class="error"><?=ventra_e($error)?></div><?php endif; ?>
