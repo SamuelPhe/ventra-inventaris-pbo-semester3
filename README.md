@@ -85,10 +85,17 @@ The database schema must be restored from an appropriate local coursework backup
 
 ## 7. Copyright and license
 
-Copyright (c) 2026 Samuel Phe. All rights reserved.
+This is a collaborative academic project developed by the following team members:
 
-Original project code, documentation, and assets authored for Ventra are proprietary. No permission is granted to copy, modify, redistribute, sublicense, or reuse these materials without prior written permission. Java, MySQL Connector/J, JCalendar, and other third-party components remain subject to their own licenses and notices. See the [LICENSE](LICENSE) file.
+- Davent Gravando
+- Marsha Marthalina
+- Nicohlas
+- Samuel
+- Wendy Lo
 
+This attribution recognizes the project team and does not claim that the entire project or every contribution is solely owned by Samuel Phe. Ownership and rights in jointly created materials and individual contributions remain with the respective authors or rightsholders, subject to any applicable team, course, institutional, or other agreements.
+
+No open-source license is granted by this repository for project materials created by the team. Permission to copy, modify, redistribute, sublicense, or reuse team-created materials should be obtained from the relevant rightsholders. Java, MySQL Connector/J, JCalendar, and other third-party components remain subject to their own licenses and notices. See the [LICENSE](LICENSE) file.
 ---
 
 This is an academic portfolio project and has not been presented as a production-ready inventory system. Test the application against a disposable database copy before any demonstration.
