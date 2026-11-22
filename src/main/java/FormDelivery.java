@@ -50,7 +50,7 @@ private outbound.OutboundDraft draft;
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(204, 255, 255));
 

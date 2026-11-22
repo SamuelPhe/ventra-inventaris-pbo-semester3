@@ -77,7 +77,7 @@ bgAdjust.add(rbDecrease);
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         jPanel3.setForeground(new java.awt.Color(0, 102, 102));

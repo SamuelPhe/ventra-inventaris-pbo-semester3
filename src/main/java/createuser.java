@@ -63,7 +63,7 @@ private masteruser parent;
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Nama");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 0));
 
