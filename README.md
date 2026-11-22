@@ -57,6 +57,20 @@ A **browser-based simulation** of Ventra's inventory workflows is available in [
 
 To publish the demo, enable GitHub Pages at **Settings → Pages → Build and deployment → Source: GitHub Actions**, then run **Deploy browser demo** from the Actions tab. After deployment, the public URL will be: https://samuelphe.github.io/ventra-inventaris-pbo-semester3/.
 
+### Open the PHP web version in GitHub Codespaces
+
+The repository also contains a small PHP browser version at `webapp/`. It provides a database-backed login and inventory summary dashboard; it is separate from the complete Java Swing desktop application and does not yet port the full inventory workflows.
+
+1. Open this repository on GitHub.
+2. Select **Code → Codespaces → Create codespace on main** (or resume the existing Ventra Codespace).
+3. Wait for the setup to finish.
+4. Open the **Ports** tab.
+5. Find **Ventra web (private)** on port `8081`, then choose **Open in Browser**.
+
+The web page should show the Ventra login screen. The existing SQL snapshot supplies the local Codespaces database, so the legacy sample account in that dump can be used for this private test only. Those credentials are exposed in a public repository; do not reuse them for a real system. Keep port `8081` **Private**.
+
+The original Java Swing application remains available separately at **Ventra desktop (private)**, port `6080`. Both interfaces use the same MariaDB container in this Codespace.
+
 The original Java application can still be run locally:
 
 1. Install JDK 17, Maven, and MySQL or MariaDB.
