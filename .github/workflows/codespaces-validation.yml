@@ -50,7 +50,7 @@ jobs:
         run: |
           export localWorkspaceFolderBasename=ventra
           if ! docker compose -f .devcontainer/docker-compose.yml up -d --build --wait --wait-timeout 240; then
-            docker compose -f .devcontainer/docker-compose.yml logs database
+            docker compose -f .devcontainer/docker-compose.yml logs
             exit 1
           fi
           tables=$(localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database mariadb -uroot -pventra_root_codespace_only -N -D uas3 -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='uas3'")
