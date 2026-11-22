@@ -29,7 +29,8 @@ services:
       - "../uas3 (6).sql:/docker-entrypoint-initdb.d/01-ventra-dump.sql:ro"
       - "../database/password_hash_migration.sql:/docker-entrypoint-initdb.d/02-password-column.sql:ro"
     healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      test: ["CMD-SHELL", "mariadb-admin ping --protocol=tcp -h 127.0.0.1 -uroot -p${MARIADB_ROOT_PASSWORD} --silent"]
+      start_period: 45s
       interval: 5s
       timeout: 5s
       retries: 30
