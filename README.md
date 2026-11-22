@@ -4,7 +4,6 @@ Ventra is a Java desktop application developed as an **Object-Oriented Programmi
 
 > **Project type:** Desktop application  
 > **Project context:** Academic project — Semester 3  
-> **Public showcase:** [Ventra-Inventaris-Showcase](https://github.com/SamuelPhe/Ventra-Inventaris-Showcase)
 
 ## 1. Application preview
 
