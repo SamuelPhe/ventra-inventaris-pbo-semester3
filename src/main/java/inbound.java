@@ -717,7 +717,7 @@ DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         "JOIN inbound_detail idt ON idt.id_produk = od.id_produk " +
         "JOIN inbound i ON i.id_inbound = idt.id_inbound " +
         "WHERE i.id_inbound = ? " +
-        "AND o.created_at > i.created_at";
+        "AND o.tanggal > i.tanggal";
 
     PreparedStatement ps = conn.prepareStatement(sql);
     ps.setInt(1, idInbound);
