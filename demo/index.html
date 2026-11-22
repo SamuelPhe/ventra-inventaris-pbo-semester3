@@ -6,22 +6,68 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{background:var(--nav);color:#cbd0e0;padding:25px 17px;display:flex;flex-direction:column;gap:27px}.brand{display:flex;align-items:center;gap:11px;padding:0 9px}.logo{height:40px;width:40px;border-radius:12px;background:#887ce3;color:white;display:grid;place-items:center;font-weight:900;font-size:19px}.brand strong{color:#fff;font-size:17px;display:block}.brand small{font-size:10px;color:#9ba4bb;letter-spacing:1.5px;text-transform:uppercase}.nav-title{color:#858da5;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;margin:0 11px 8px}.nav{display:grid;gap:5px}.nav button{background:transparent;border:0;color:#c0c6d6;padding:11px 12px;border-radius:9px;text-align:left;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:var(--nav2);color:#fff}.nav button .i{width:20px;text-align:center;font-size:16px}.side-foot{margin-top:auto;border:1px solid #444a60;border-radius:12px;padding:14px;color:#aab1c5;font-size:11px}.side-foot b{display:block;color:#fff;margin-bottom:5px}.main{min-width:0}.top{height:72px;background:#fff;border-bottom:1px solid var(--line);padding:0 30px;display:flex;align-items:center;justify-content:space-between}.path{font-size:12px;color:var(--muted)}.path b{color:var(--ink);font-size:14px;margin-left:8px}.user{display:flex;align-items:center;gap:11px}.demo{font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:800;color:#89661f;background:#fff4d9;border:1px solid #f2dfad;border-radius:30px;padding:6px 10px}.role{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;color:#46516b}.avatar{width:34px;height:34px;background:#e7e3ff;color:#584da9;display:grid;place-items:center;border-radius:50%;font-weight:800}.content{max-width:1450px;margin:auto;padding:28px 30px 50px}.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:22px}.tag{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;font-weight:800;color:var(--purple)}h1{font-size:26px;letter-spacing:-.6px;margin:5px 0}.heading p{margin:0;color:var(--muted)}.btn{padding:10px 14px;border-radius:9px;border:0;font-weight:700;display:inline-flex;gap:7px;align-items:center}.primary{background:var(--purple);color:#fff}.primary:hover{background:#5749b7}.soft{background:#fff;border:1px solid var(--line);color:#4c5570}.green{background:#e4f4ee;color:#176d59}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.card{padding:17px}.card .label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}.symbol{width:34px;height:34px;border-radius:10px;background:var(--lav);color:var(--purple);display:grid;place-items:center;font-size:16px}.card strong{font-size:25px;display:block;margin:9px 0 1px}.card small{color:var(--muted);font-size:11px}.panel{padding:19px;margin-bottom:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.panel-head h2{font-size:15px;margin:0}.panel-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}.field{padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}.search{min-width:230px}table{width:100%;border-collapse:collapse;min-width:620px}th{text-align:left;padding:10px;color:#8991a3;font-size:10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--line)}td{padding:12px 10px;border-bottom:1px solid #f0f2f6}tr:last-child td{border-bottom:0}.muted{display:block;color:var(--muted);font-size:11px}.tablewrap{overflow:auto}.pill{font-size:10px;font-weight:800;padding:5px 9px;border-radius:99px;display:inline-block}.good{background:#e1f4ed;color:#1b745a}.warn{background:#fff1d7;color:#966417}.bad{background:#fde8ea;color:#a7434e}.info{background:#eeebff;color:#5c50b4}.page{display:none}.page.active{display:block}.notice{border:1px solid #e7e2ff;background:#f5f3ff;color:#6259a6;border-radius:10px;padding:11px 14px;font-size:11px;margin-bottom:16px}.empty{text-align:center;padding:30px;color:var(--muted)}.modalbg{position:fixed;inset:0;background:#1b203b88;display:none;align-items:center;justify-content:center;padding:16px;z-index:9}.modalbg.show{display:flex}.modal{width:min(520px,100%);background:#fff;border-radius:15px;padding:22px;box-shadow:0 25px 70px #1115}.modal h3{margin:0 0 4px}.modal p{font-size:12px;color:var(--muted);margin:0 0 17px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{display:grid;gap:5px}.f label{font-size:11px;color:#667087;font-weight:700}.f input,.f select{border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}.f.full{grid-column:1/-1}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.toast{position:fixed;bottom:20px;right:20px;background:#242a40;color:#fff;border-radius:9px;padding:12px 15px;display:none;box-shadow:var(--shadow);z-index:12}.toast.show{display:block}
 @media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{padding:13px;gap:12px}.nav{grid-template-columns:repeat(3,1fr)}.nav-title,.side-foot{display:none}.nav button{justify-content:center;font-size:11px;padding:9px 3px}.nav button .i{display:none}.top{padding:0 16px}.content{padding:20px 16px}.cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.top{height:auto;padding:12px;gap:10px;flex-wrap:wrap}.user{width:100%;justify-content:space-between}.content{padding:16px 12px}.heading{display:block}.heading .btn{margin-top:13px}.panel{padding:13px}.form{grid-template-columns:1fr}.f.full{grid-column:auto}.cards{gap:9px}.card{padding:12px}.card strong{font-size:21px}}
+</style>
+<style>
+
+/* Desktop-style presentation based on the original Ventra Swing forms */
+body{background:#e9eeee;color:#183638;font-family:Tahoma,Arial,sans-serif}
+.app{display:grid;grid-template-columns:218px minmax(0,1fr);width:min(1024px,calc(100vw - 24px));min-height:600px;margin:24px auto;background:#fff;border:1px solid #b8c8c8;box-shadow:0 12px 35px rgba(0,40,42,.15)}
+.sidebar{background:#006064;color:#fff;padding:0 0 14px;gap:0;border-right:7px solid #ff9900}
+.brand{padding:22px 14px;background:#006064;border-bottom:8px solid #ff9900}
+.logo{background:#ffcc66;color:#00585c;border-radius:2px;width:42px;height:42px}
+.brand strong{font-family:Tahoma,sans-serif;color:#fff;font-size:18px}
+.brand small{color:#d5e5e5;letter-spacing:.5px}
+.nav-title{margin:0;padding:10px 12px;background:#ff9900;color:#004f53}
+.nav{padding:12px 10px;gap:8px}
+.nav button{background:#006666;border:1px solid #00858a;border-radius:2px;color:#fff;padding:11px 9px;font-family:Tahoma,sans-serif}
+.nav button .i{color:#ffcc66}
+.nav button.active,.nav button:hover{background:#ff9900;color:#004f53;border-color:#df8300}
+.nav button.active .i,.nav button:hover .i{color:#004f53}
+.side-foot{display:none}
+.top{height:56px;background:#fff;border-bottom:8px solid #ff9900;padding:0 20px}
+.path{color:#587274;font-family:Tahoma,sans-serif}
+.path b{color:#006064}
+.demo{background:#fff3d7;border-color:#ffd58c;color:#805000}
+.role{border-radius:2px;border-color:#aebfbe;font-family:Tahoma,sans-serif}
+.avatar{border-radius:2px;background:#006064;color:#fff}
+.content{padding:22px 24px 36px;max-width:none}
+.heading h1{font-family:Tahoma,sans-serif;color:#006064;font-size:28px}
+.tag{color:#b96b00}
+.card,.panel{border:1px solid #cbd6d5;border-radius:2px;box-shadow:none}
+.card{border-top:5px solid #ff9900}
+.btn.primary{background:#006666;border-radius:2px;color:#fff}
+.btn.soft{border-radius:2px}
+.field{border-radius:2px;border-color:#aebfbe}
+table{border-collapse:collapse}
+th{background:#eaf1f0;color:#23494a}
+@media(max-width:760px){.app{grid-template-columns:1fr;width:calc(100% - 16px);margin:8px}.sidebar{border-right:0;border-bottom:7px solid #ff9900}.nav{display:flex;flex-wrap:wrap}.content{padding:16px}}
+
+.ventra-home-menu{margin:6px 0 18px}
+.ventra-menu-title{font: bold 30px Tahoma,sans-serif;color:#fff;background:#ff9900;padding:12px 16px;margin-bottom:14px}
+.ventra-menu-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ventra-menu-groups section{border:1px solid #c8d4d3;background:#f8fbfa;padding:12px}
+.ventra-menu-groups h2{font:bold 19px Tahoma,sans-serif;color:#fff;background:#006064;margin:-12px -12px 12px;padding:9px 12px}
+.ventra-menu-groups button{display:block;width:100%;margin:7px 0;padding:12px;background:#006666;color:white;border:0;border-radius:2px;font: bold 15px Tahoma,sans-serif;text-align:left}
+.ventra-menu-groups button:hover{background:#ff9900;color:#004f53}
+#page-dashboard .cards,#page-dashboard .notice,#page-dashboard .panel{display:none}
+@media(max-width:760px){.ventra-menu-groups{grid-template-columns:1fr}}
+
 </style></head><body>
 <div class="app">
-<aside class="sidebar"><div class="brand"><div class="logo">V</div><div><strong>Ventra</strong><small>Inventory workspace</small></div></div>
+<aside class="sidebar"><div class="brand"><div class="logo">V</div><div><strong>Ventra</strong><small>Inventory System</small></div></div>
 <div><div class="nav-title">Inventory modules</div><nav class="nav">
 <button class="active" data-page="dashboard"><span class="i">▦</span>Dashboard</button>
-<button data-page="products"><span class="i">▣</span>Products</button>
-<button data-page="stock"><span class="i">◈</span>Stock adjustment</button>
-<button data-page="inbound"><span class="i">↓</span>Inbound</button>
-<button data-page="outbound"><span class="i">↑</span>Outbound</button>
+<button data-page="products"><span class="i">▣</span>Master Product</button>
+<button data-page="stock"><span class="i">◈</span>Stock Adjustment</button>
+<button data-page="inbound"><span class="i">↓</span>InBound</button>
+<button data-page="outbound"><span class="i">↑</span>OutBound</button>
 <button data-page="delivery"><span class="i">⇢</span>Delivery</button></nav></div>
 <div class="side-foot"><b>Browser demo mode</b>Sample inventory only. Your changes stay in this browser and do not update a real database.</div>
 </aside>
 <main class="main"><header class="top"><div class="path">Workspace / <b id="crumb">Dashboard</b></div><div class="user"><span class="demo">Interactive demo</span><select class="role" id="role"><option>Administrator</option><option>Staff</option></select><div class="avatar" id="avatar">AD</div></div></header>
 <div class="content">
 <section class="page active" id="page-dashboard">
-<div class="heading"><div><div class="tag">Inventory overview</div><h1>Welcome back, <span id="welcome">Administrator</span></h1><p>Monitor product movement and warehouse activity.</p></div><button class="btn primary" onclick="openProduct()">＋ Add product</button></div>
+<div class="heading"><div><div class="tag">Inventory overview</div><h1>Welcome To Inventory System Ventra</h1><p>Hello, <span id="welcome">Administrator</span></p></div><button class="btn primary" onclick="openProduct()">＋ Add product</button></div>
 <div class="cards">
 <div class="card"><div class="label">Total products <span class="symbol">▣</span></div><strong id="total-products">24</strong><small>Registered product items</small></div>
 <div class="card"><div class="label">Total stock units <span class="symbol">◈</span></div><strong id="total-stock">1,280</strong><small>Across all sample products</small></div>
@@ -30,6 +76,15 @@
 </div>
 <div class="notice">This web interface is a browser-based simulation of Ventra's Java Swing inventory workflows. It is not connected to MySQL.</div>
 <div class="panel"><div class="panel-head"><div><h2>Recent stock movement</h2><p>Latest inbound and outbound activity</p></div><button class="btn soft" onclick="go('inbound')">View movements →</button></div><div class="tablewrap"><table><thead><tr><th>Product</th><th>Movement</th><th>Quantity</th><th>Reference</th><th>Date</th></tr></thead><tbody id="recent-moves"></tbody></table></div></div>
+<div class="ventra-home-menu">
+  <div class="ventra-menu-title">Ventra's Menu</div>
+  <div class="ventra-menu-groups">
+    <section><h2>Transaction</h2><button onclick="go('inbound')">InBound</button><button onclick="go('outbound')">OutBound</button><button onclick="go('delivery')">Delivery</button></section>
+    <section><h2>Data</h2><button onclick="go('stock')">Stock Data / Adjustment</button></section>
+    <section><h2>Master</h2><button onclick="go('products')">Master Product</button></section>
+  </div>
+</div>
+
 <div class="panel"><div class="panel-head"><div><h2>Low stock watchlist</h2><p>Items that need replenishment</p></div><button class="btn soft" onclick="go('stock')">Adjust stock →</button></div><div class="tablewrap"><table><thead><tr><th>Product</th><th>Category</th><th>Available</th><th>Minimum</th><th>Status</th></tr></thead><tbody id="low-table"></tbody></table></div></div>
 </section>
 <section class="page" id="page-products"><div class="heading"><div><div class="tag">Master data</div><h1>Product management</h1><p>Maintain product records and current inventory levels.</p></div><button class="btn primary" onclick="openProduct()">＋ Add product</button></div><div class="panel"><div class="filters"><input id="product-search" class="field search" placeholder="Search product or category…" oninput="renderProducts()"><select id="cat-filter" class="field" onchange="renderProducts()"><option value="">All categories</option><option>Electronics</option><option>Office</option><option>Household</option><option>Food</option></select></div><div class="tablewrap"><table><thead><tr><th>Product</th><th>Category</th><th>Unit price</th><th>Stock</th><th>Minimum</th><th>Action</th></tr></thead><tbody id="products-table"></tbody></table></div></div></section>
