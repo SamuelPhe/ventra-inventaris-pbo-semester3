@@ -1,0 +1,47 @@
+name: Temporary archive database audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/tmp-archive-audit.yml"
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect bundled archives without printing account data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import io, zipfile, re, pathlib
+          archives = ["UAS_PBO final (1).zip"]
+          seen = set()
+          def inspect_zip(data, label, depth=0):
+              if depth > 3:
+                  print("MAX_NESTED_DEPTH", label); return
+              try:
+                  z = zipfile.ZipFile(io.BytesIO(data))
+              except Exception as exc:
+                  print("NOT_A_ZIP", label, type(exc).__name__); return
+              print("\\nARCHIVE", label)
+              for info in z.infolist():
+                  name = info.filename
+                  if info.is_dir(): continue
+                  low = name.lower()
+                  print("ENTRY", name, "BYTES", info.file_size)
+                  if low.endswith(".sql"):
+                      raw = z.read(name)
+                      text = raw.decode("utf-8", "replace")
+                      tables = re.findall(r"CREATE\\s+TABLE\\s+(?:IF\\s+NOT\\s+EXISTS\\s+)?[`\\"]?([\\w]+)", text, re.I)
+                      dbs = re.findall(r"CREATE\\s+DATABASE\\s+(?:IF\\s+NOT\\s+EXISTS\\s+)?[`\\"]?([\\w]+)", text, re.I)
+                      inserts = re.findall(r"INSERT\\s+INTO\\s+[`\\"]?([\\w]+)", text, re.I)
+                      print("SQL_SUMMARY", name, "DATABASES", sorted(set(dbs)), "TABLES", sorted(set(tables)), "INSERT_TABLES", sorted(set(inserts)))
+                  elif low.endswith(".zip"):
+                      inspect_zip(z.read(name), label + "!" + name, depth+1)
+          for archive in archives:
+              p = pathlib.Path(archive)
+              if p.exists():
+                  inspect_zip(p.read_bytes(), archive)
+              else:
+                  print("ARCHIVE_MISSING", archive)
+          PY
