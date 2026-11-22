@@ -288,7 +288,7 @@ private void loadLogs() {
         String sql = """
             SELECT 
                 a.id_adjust,
-                a.created_at,
+                a.tanggal,
                 p.nama_produk,
                 a.qty,
                 a.keterangan,
@@ -296,8 +296,8 @@ private void loadLogs() {
             FROM adjust_stock a
             JOIN produk p ON a.id_produk = p.id_produk
             JOIN user u ON a.created_by = u.id
-            WHERE a.created_at >= DATE_SUB(NOW(), INTERVAL 3 DAY)
-            ORDER BY a.created_at DESC
+            WHERE a.tanggal >= DATE_SUB(NOW(), INTERVAL 3 DAY)
+            ORDER BY a.tanggal DESC
         """;
 
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -309,7 +309,7 @@ private void loadLogs() {
 
             Object[] row = {
                 rs.getInt("id_adjust"),
-                rs.getTimestamp("created_at"),
+                rs.getTimestamp("tanggal"),
                 rs.getString("nama_produk"),
                 jenis,
                 Math.abs(qty),

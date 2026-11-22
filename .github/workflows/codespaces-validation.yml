@@ -59,6 +59,8 @@ jobs:
           test "$password_length" -eq 255
           inbound_price_column=$(localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database mariadb -uroot -pventra_root_codespace_only -N -D uas3 -e "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema='uas3' AND table_name='inbound_detail' AND column_name='harga'")
           test "$inbound_price_column" -eq 1
+          outbound_price_columns=$(localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database mariadb -uroot -pventra_root_codespace_only -N -D uas3 -e "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema='uas3' AND table_name='outbound_detail' AND column_name IN ('harga_jual','subtotal')")
+          test "$outbound_price_columns" -eq 2
 
       - name: Stop local services
         if: always()
