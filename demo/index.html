@@ -9,6 +9,38 @@
 </style>
 <style>
 
+/* Original Ventra home is a Swing feature menu, not a web sidebar */
+body{background:#e9eeee}
+.app{width:min(1024px,calc(100vw - 24px));min-height:600px;height:600px;margin:24px auto;display:block;overflow:hidden;background:#fff;border:1px solid #bccbca;box-shadow:0 12px 35px rgba(0,40,42,.15)}
+.sidebar{display:none!important}
+.main{height:600px;width:100%;overflow:hidden}
+.top{height:46px;border-bottom:7px solid #ff9900;padding:0 18px;background:#f9fbfa}
+.path{display:flex;align-items:center;gap:14px;color:#006064}
+.path b{color:#006064}
+.ventra-home{border:1px solid #c6d2d1;background:white;color:#006064;padding:5px 9px;border-radius:2px;font:12px Tahoma,Arial,sans-serif}
+.user{margin-left:auto}
+.content{max-width:none;height:554px;overflow:auto;padding:24px 26px 28px}
+#page-dashboard{min-height:520px}
+#page-dashboard .heading{display:block;margin:0 0 20px}
+#page-dashboard .heading .tag{font:12px Tahoma,Arial,sans-serif;color:#a76300;letter-spacing:.5px}
+#page-dashboard .heading h1{font:700 30px Tahoma,Arial,sans-serif;color:#006064;margin:5px 0 7px}
+#page-dashboard .heading p{font:16px Tahoma,Arial,sans-serif;color:#006064}
+#page-dashboard .heading .btn{display:none!important}
+#page-dashboard .cards,#page-dashboard .notice,#page-dashboard .panel{display:none!important}
+.ventra-home-menu{margin:20px 0 18px}
+.ventra-menu-title{font:700 30px Tahoma,Arial,sans-serif;color:white;background:#ff9900;padding:12px 16px;margin-bottom:14px}
+.ventra-menu-groups{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px}
+.ventra-menu-groups section{border:1px solid #bdcdcb;background:#f8fbfa;padding:13px}
+.ventra-menu-groups h2{font:700 20px Tahoma,Arial,sans-serif;color:#fff;background:#006064;margin:-13px -13px 12px;padding:10px 13px}
+.ventra-menu-groups button{display:block;width:100%;min-height:42px;margin:8px 0;padding:10px 12px;background:#006666;color:white;border:0;border-radius:2px;font:700 16px Tahoma,Arial,sans-serif;text-align:left}
+.ventra-menu-groups button:hover{background:#ff9900;color:#004f53}
+.page:not(#page-dashboard){padding:22px 24px 30px}
+.page:not(#page-dashboard) .heading h1{font-family:Tahoma,Arial,sans-serif;color:#006064}
+@media(max-width:760px){.app{width:calc(100% - 12px);height:auto;min-height:600px;margin:6px}.main{height:auto;min-height:600px}.content{height:auto}.ventra-menu-groups{grid-template-columns:1fr}}
+
+</style>
+<style>
+
 /* Desktop-style presentation based on the original Ventra Swing forms */
 body{background:#e9eeee;color:#183638;font-family:Tahoma,Arial,sans-serif}
 .app{display:grid;grid-template-columns:218px minmax(0,1fr);width:min(1024px,calc(100vw - 24px));min-height:600px;margin:24px auto;background:#fff;border:1px solid #b8c8c8;box-shadow:0 12px 35px rgba(0,40,42,.15)}
@@ -64,7 +96,7 @@ th{background:#eaf1f0;color:#23494a}
 <button data-page="delivery"><span class="i">⇢</span>Delivery</button></nav></div>
 <div class="side-foot"><b>Browser demo mode</b>Sample inventory only. Your changes stay in this browser and do not update a real database.</div>
 </aside>
-<main class="main"><header class="top"><div class="path">Workspace / <b id="crumb">Dashboard</b></div><div class="user"><span class="demo">Interactive demo</span><select class="role" id="role"><option>Administrator</option><option>Staff</option></select><div class="avatar" id="avatar">AD</div></div></header>
+<main class="main"><header class="top"><div class="path"><button class="ventra-home" onclick="go('dashboard')">← Home</button><b id="crumb">Dashboard</b></div><div class="user"><span class="demo">Interactive demo</span><select class="role" id="role"><option>Administrator</option><option>Staff</option></select><div class="avatar" id="avatar">AD</div></div></header>
 <div class="content">
 <section class="page active" id="page-dashboard">
 <div class="heading"><div><div class="tag">Inventory overview</div><h1>Welcome To Inventory System Ventra</h1><p>Hello, <span id="welcome">Administrator</span></p></div><button class="btn primary" onclick="openProduct()">＋ Add product</button></div>
@@ -81,7 +113,7 @@ th{background:#eaf1f0;color:#23494a}
   <div class="ventra-menu-groups">
     <section><h2>Transaction</h2><button onclick="go('inbound')">InBound</button><button onclick="go('outbound')">OutBound</button><button onclick="go('delivery')">Delivery</button></section>
     <section><h2>Data</h2><button onclick="go('stock')">Stock Data / Adjustment</button></section>
-    <section><h2>Master</h2><button onclick="go('products')">Master Product</button></section>
+    <section><h2>Master</h2><button onclick="go('products')">Master Product</button><button onclick="toast('Master User merupakan menu desktop asli; fungsi ini belum terhubung pada demo web.')">Master User</button></section>
   </div>
 </div>
 
