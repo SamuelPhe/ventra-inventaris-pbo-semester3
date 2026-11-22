@@ -48,16 +48,11 @@ jobs:
 
       - name: Restore and check original MariaDB snapshot
         run: |
-          localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml up -d database
-          ready=0
-          for attempt in $(seq 1 60); do
-            if localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database healthcheck.sh --connect --innodb_initialized; then
-              ready=1
-              break
-            fi
-            sleep 2
-          done
-          test "$ready" -eq 1
+          export localWorkspaceFolderBasename=ventra
+          if ! docker compose -f .devcontainer/docker-compose.yml up -d --wait --wait-timeout 180 database; then
+            docker compose -f .devcontainer/docker-compose.yml logs database
+            exit 1
+          fi
           tables=$(localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database mariadb -uroot -pventra_root_codespace_only -N -D uas3 -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='uas3'")
           test "$tables" -eq 8
           password_length=$(localWorkspaceFolderBasename=ventra docker compose -f .devcontainer/docker-compose.yml exec -T database mariadb -uroot -pventra_root_codespace_only -N -D uas3 -e "SELECT CHARACTER_MAXIMUM_LENGTH FROM information_schema.columns WHERE table_schema='uas3' AND table_name='user' AND column_name='password'")
