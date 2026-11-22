@@ -84,6 +84,37 @@ th{background:#eaf1f0;color:#23494a}
 #page-dashboard .cards,#page-dashboard .notice,#page-dashboard .panel{display:none}
 @media(max-width:760px){.ventra-menu-groups{grid-template-columns:1fr}}
 
+</style><style>
+
+/* Final override: full-frame Ventra Swing-style menu */
+body{background:#e9eeee}
+.app{width:min(1024px,calc(100vw - 24px));min-height:600px;height:600px;margin:24px auto;display:block;overflow:hidden;background:#fff;border:1px solid #bccbca;box-shadow:0 12px 35px rgba(0,40,42,.15)}
+.sidebar{display:none!important}
+.main{height:600px;width:100%;overflow:hidden}
+.top{height:46px;border-bottom:7px solid #ff9900;padding:0 18px;background:#f9fbfa}
+.path{display:flex;align-items:center;gap:14px;color:#006064}
+.path b{color:#006064}
+.ventra-home{border:1px solid #c6d2d1;background:white;color:#006064;padding:5px 9px;border-radius:2px;font:12px Tahoma,Arial,sans-serif}
+.user{margin-left:auto}
+.content{max-width:none;height:554px;overflow:auto;padding:24px 26px 28px}
+#page-dashboard{min-height:520px}
+#page-dashboard .heading{display:block;margin:0 0 20px}
+#page-dashboard .heading .tag{font:12px Tahoma,Arial,sans-serif;color:#a76300;letter-spacing:.5px}
+#page-dashboard .heading h1{font:700 30px Tahoma,Arial,sans-serif;color:#006064;margin:5px 0 7px}
+#page-dashboard .heading p{font:16px Tahoma,Arial,sans-serif;color:#006064}
+#page-dashboard .heading .btn{display:none!important}
+#page-dashboard .cards,#page-dashboard .notice,#page-dashboard .panel{display:none!important}
+.ventra-home-menu{margin:20px 0 18px}
+.ventra-menu-title{font:700 30px Tahoma,Arial,sans-serif;color:white;background:#ff9900;padding:12px 16px;margin-bottom:14px}
+.ventra-menu-groups{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:14px}
+.ventra-menu-groups section{border:1px solid #bdcdcb;background:#f8fbfa;padding:13px}
+.ventra-menu-groups h2{font:700 20px Tahoma,Arial,sans-serif;color:#fff;background:#006064;margin:-13px -13px 12px;padding:10px 13px}
+.ventra-menu-groups button{display:block;width:100%;min-height:42px;margin:8px 0;padding:10px 12px;background:#006666;color:white;border:0;border-radius:2px;font:700 16px Tahoma,Arial,sans-serif;text-align:left}
+.ventra-menu-groups button:hover{background:#ff9900;color:#004f53}
+.page:not(#page-dashboard){padding:22px 24px 30px}
+.page:not(#page-dashboard) .heading h1{font-family:Tahoma,Arial,sans-serif;color:#006064}
+@media(max-width:760px){.app{width:calc(100% - 12px);height:auto;min-height:600px;margin:6px}.main{height:auto;min-height:600px}.content{height:auto}.ventra-menu-groups{grid-template-columns:1fr}}
+
 </style></head><body>
 <div class="app">
 <aside class="sidebar"><div class="brand"><div class="logo">V</div><div><strong>Ventra</strong><small>Inventory System</small></div></div>
