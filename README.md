@@ -1,42 +1,94 @@
 # Ventra — Inventory Management Application
 
-Proyek aplikasi desktop pengelolaan inventaris yang dibuat sebagai tugas akademik Pemrograman Berorientasi Objek (PBO) Semester 3.
+Ventra is a Java desktop application developed as an **Object-Oriented Programming (PBO), Semester 3** academic project. It focuses on common inventory workflows, including product records, stock adjustments, incoming goods, outgoing goods, and delivery information.
 
-## Fitur yang terlihat pada source
-- Login dan pengelolaan akun pengguna.
-- Master data produk dan pengguna.
-- Pencatatan stok dan penyesuaian stok.
-- Pencatatan barang masuk (inbound).
-- Pencatatan barang keluar (outbound).
-- Data pengiriman dan detail transaksi inventaris.
+> **Project type:** Desktop application  
+> **Project context:** Academic project — Semester 3  
+> **Public showcase:** [Ventra-Inventaris-Showcase](https://github.com/SamuelPhe/Ventra-Inventaris-Showcase)
 
-## Teknologi
+## 1. Application preview
+
+The repository currently contains logo assets but does not yet include verified screenshots of the running desktop interface.
+
+Suggested screenshots to add:
+- Login window
+- Main dashboard
+- Product and stock management
+- Incoming-goods and outgoing-goods forms
+- Delivery information
+
+Use fictional product and account data. Do not include real employee details, database records, or credentials.
+
+## 2. Main features
+
+- User login and account management
+- Product and user master data
+- Stock recording and stock adjustment
+- Incoming-goods (inbound) records
+- Outgoing-goods (outbound) records
+- Delivery records and inventory transaction details
+
+## 3. Technology stack
+
 - Java 17
-- Java Swing (form GUI NetBeans)
+- Java Swing and NetBeans GUI forms
 - Maven
-- MySQL / JDBC
-- JCalendar
+- MySQL Connector/J 8.0.33
+- JCalendar 1.4
+- JDBC
 
-## Struktur proyek
-- `pom.xml`: konfigurasi Maven.
-- `src/main/java`: source code Java dan form NetBeans.
-- `src/main/resources/images`: dua aset logo yang tersedia. Beberapa referensi gambar antarmuka pada form mungkin belum ikut terarsip, sehingga tampilan tertentu perlu diperiksa setelah proyek dijalankan.
-- `database/`: catatan persiapan database dan migrasi kolom password.
+## 4. Architecture overview
 
-## Persiapan menjalankan
-1. Instal JDK 17, Maven, dan MySQL/MariaDB.
-2. Siapkan database bernama `uas3` beserta tabel yang dipakai aplikasi.
-3. Atur environment variable sebelum menjalankan aplikasi:
-   - `DB_URL` (opsional; default `jdbc:mysql://localhost:3306/uas3?serverTimezone=UTC`)
-   - `DB_USER` (wajib)
-   - `DB_PASSWORD` (wajib)
-4. Jalankan `mvn clean compile` untuk kompilasi.
-5. Jalankan `mvn exec:java` untuk membuka form login.
+Ventra is structured as a Java Swing desktop application. UI forms call application classes for product, stock, inbound, outbound, and delivery operations. Database access is centralized through `DatabaseConnection`, which reads connection details from environment variables and connects to MySQL through JDBC.
 
-**Catatan database:** arsip proyek yang tersedia tidak menyertakan dump SQL atau dokumentasi skema database. Repository ini belum dapat membuat database dari nol. Pulihkan skema database asli terlebih dahulu. Kolom `user.password` harus berukuran minimal `VARCHAR(255)`; gunakan skrip `database/password_hash_migration.sql` pada database salinan.
+```mermaid
+flowchart TD
+    U[User] --> UI[Java Swing Forms]
+    UI --> MOD[Inventory Application Modules]
+    MOD --> AUTH[Login, Session, Password Utilities]
+    MOD --> DAL[DatabaseConnection]
+    DAL --> JDBC[JDBC / MySQL Connector]
+    JDBC --> DB[(MySQL Database)]
+    CAL[JCalendar] --> UI
+```
 
-## Keamanan dan batasan
-- Koneksi database dipusatkan dan membaca kredensial dari environment variable.
-- Password baru dan password yang diubah disimpan menggunakan PBKDF2-HMAC-SHA256 dengan salt acak.
-- Password lama dalam format teks biasa hanya diterima untuk migrasi ketika login berhasil, lalu otomatis diganti dengan hash. Pastikan database telah dimigrasikan sebelum menggunakan versi ini.
-- Proyek ini tugas akademik dan belum diuji sebagai aplikasi produksi. Lakukan pengujian fungsional pada database salinan sebelum digunakan.
+## 5. Demo and local setup
+
+There is **no public web demo** because this is a desktop application. To run it locally:
+
+1. Install JDK 17, Maven, and MySQL or MariaDB.
+2. Restore the project database named `uas3`. The repository does not currently include a complete SQL schema or database dump.
+3. Set the following environment variables before launching:
+   - `DB_URL` (optional; default: `jdbc:mysql://localhost:3306/uas3?serverTimezone=UTC`)
+   - `DB_USER`
+   - `DB_PASSWORD`
+4. Build the project:
+
+   ```bash
+   mvn clean compile
+   ```
+
+5. Launch the application:
+
+   ```bash
+   mvn exec:java
+   ```
+
+The database schema must be restored from an appropriate local coursework backup before the application can operate correctly. Never use production or personal database credentials in a public repository.
+
+## 6. Project structure
+
+- `src/main/java/` — Swing forms, application modules, session and database classes
+- `src/main/resources/images/` — logo assets
+- `database/` — database preparation notes and password-hash migration
+- `pom.xml` — Maven dependencies and build configuration
+
+## 7. Copyright and license
+
+Copyright (c) 2026 Samuel Phe. All rights reserved.
+
+Original project code, documentation, and assets authored for Ventra are proprietary. No permission is granted to copy, modify, redistribute, sublicense, or reuse these materials without prior written permission. Java, MySQL Connector/J, JCalendar, and other third-party components remain subject to their own licenses and notices. See the [LICENSE](LICENSE) file.
+
+---
+
+This is an academic portfolio project and has not been presented as a production-ready inventory system. Test the application against a disposable database copy before any demonstration.
